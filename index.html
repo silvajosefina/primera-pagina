@@ -1,14 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulce Atelier - Pastelería Artesanal</title>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dulce Atelier – Pastelería Artesanal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Lato', sans-serif; }
+    h1, h2, h3, .font-display { font-family: 'Playfair Display', serif; }
 
-<body>
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* Hero floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(-2deg); }
+    }
+    .float-anim { animation: float 5s ease-in-out infinite; }
+
+    /* Fade-in on load */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.8s ease forwards; }
+    .delay-1 { animation-delay: 0.15s; opacity: 0; }
+    .delay-2 { animation-delay: 0.30s; opacity: 0; }
+    .delay-3 { animation-delay: 0.45s; opacity: 0; }
+    .delay-4 { animation-delay: 0.60s; opacity: 0; }
+
+    /* Card hover lift */
+    .card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.10); }
+
+    /* Nav link underline */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: #b45309;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Divider ornament */
+    .ornament {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .ornament::before, .ornament::after {
+      content: ''; flex: 1; height: 1px; background: #d6b896;
+    }
+  </style>
+</head>
+<body class="bg-amber-50 text-stone-800">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="sticky top-0 z-50 bg-amber-50/90 backdrop-blur-sm border-b border-amber-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-2">
+        <span class="text-2xl">🎂</span>
+        <span class="font-display text-xl font-bold text-amber-900 leading-none">
+          Dulce<br><span class="font-light italic text-amber-700">Atelier</span>
+        </span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-8 text-sm font-light tracking-wide text-stone-600">
+        <li><a href="#inicio"   class="nav-link hover:text-amber-800 transition-colors">Inicio</a></li>
+        <li><a href="#nosotros" class="nav-link hover:text-amber-800 transition-colors">Nosotros</a></li>
+        <li><a href="#menu"     class="nav-link hover:text-amber-800 transition-colors">Menú</a></li>
+        <li><a href="#galeria"  class="nav-link hover:text-amber-800 transition-colors">Galería</a></li>
+        <li><a href="#contacto" class="nav-link hover:text-amber-800 transition-colors">Contacto</a></li>
+      </ul>
+
+      <!-- CTA -->
+      <a href="#contacto"
+         class="hidden md:inline-block bg-amber-800 text-amber-50 text-sm font-semibold px-5 py-2 rounded-full
+                hover:bg-amber-700 hover:shadow-lg transition-all duration-300">
+        Hacer un pedido
+      </a>
+
+      <!-- Mobile hamburger (decorative) -->
+      <div class="md:hidden flex flex-col gap-1.5 cursor-pointer">
+        <span class="block w-6 h-0.5 bg-amber-900"></span>
+        <span class="block w-6 h-0.5 bg-amber-900"></span>
+        <span class="block w-4 h-0.5 bg-amber-900"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="inicio" class="max-w-6xl mx-auto px-6 pt-16 pb-24
+                               grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <!-- Text -->
+    <div>
+      <p class="fade-up delay-1 text-amber-700 text-sm font-semibold tracking-widest uppercase mb-4">
+        Pastelería artesanal · Desde 2010
+      </p>
+      <h1 class="fade-up delay-2 font-display text-5xl md:text-6xl font-bold text-amber-900 leading-tight mb-6">
+        Cada bocado,<br><em class="font-light">una obra de arte.</em>
+      </h1>
+      <p class="fade-up delay-3 text-stone-500 text-lg font-light leading-relaxed mb-10 max-w-md">
+        Elaboramos tortas, pasteles y delicias con ingredientes seleccionados y el amor de siempre. Tu momento dulce comienza aquí.
+      </p>
+      <div class="fade-up delay-4 flex flex-wrap gap-4">
+        <a href="#menu"
+           class="bg-amber-800 text-amber-50 font-semibold px-8 py-3 rounded-full
+                  hover:bg-amber-700 hover:shadow-xl hover:scale-105 transition-all duration-300">
+          Ver menú
+        </a>
+        <a href="#nosotros"
+           class="border border-amber-800 text-amber-800 font-semibold px-8 py-3 rounded-full
+                  hover:bg-amber-100 transition-all duration-300">
+          Conocernos
+        </a>
+      </div>
+    </div>
+
+    <!-- Floating image / illustration -->
+    <div class="flex justify-center">
+      <div class="float-anim relative">
+        <!-- Main "cake" illustration using emoji + decorative ring -->
+        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-amber-100 border-4 border-amber-200 shadow-2xl
+                    flex items-center justify-center text-9xl">
+          🎂
+        </div>
+        <!-- Small floating badges -->
+        <span class="absolute -top-3 -right-3 bg-rose-100 border border-rose-300 text-rose-700
+                     text-xs font-bold px-3 py-1 rounded-full shadow">
+          100% casero
+        </span>
+        <span class="absolute -bottom-3 -left-3 bg-amber-800 text-amber-50
+                     text-xs font-bold px-3 py-1 rounded-full shadow">
+          ✨ Sin conservantes
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS BAR ===== -->
+  <div class="bg-amber-800 text-amber-50">
+    <div class="max-w-6xl mx-auto px-6 py-8
+                grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <p class="font-display text-3xl font-bold">+5000</p>
+        <p class="text-amber-300 text-sm mt-1 font-light">Clientes felices</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl font-bold">15</p>
+        <p class="text-amber-300 text-sm mt-1 font-light">Años de experiencia</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl font-bold">+80</p>
+        <p class="text-amber-300 text-sm mt-1 font-light">Recetas propias</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl font-bold">100%</p>
+        <p class="text-amber-300 text-sm mt-1 font-light">Ingredientes naturales</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NOSOTROS ===== -->
+  <section id="nosotros" class="max-w-6xl mx-auto px-6 py-24">
+    <div class="ornament mb-4">
+      <span class="font-display italic text-amber-700 text-lg">Nuestra historia</span>
+    </div>
+    <h2 class="font-display text-4xl font-bold text-amber-900 text-center mb-6">
+      Horneado con pasión desde el primer día
+    </h2>
+    <p class="text-stone-500 font-light text-center max-w-2xl mx-auto mb-16 leading-relaxed">
+      Dulce Atelier nació en una pequeña cocina familiar en 2010. Lo que comenzó como un hobbie se convirtió en una pastelería de culto en el barrio, reconocida por su calidad artesanal y diseño único en cada pieza.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Feature 1 -->
+      <div class="card-lift bg-white rounded-2xl p-8 shadow-sm border border-amber-100 text-center">
+        <div class="text-5xl mb-4">🌾</div>
+        <h3 class="font-display text-xl font-bold text-amber-900 mb-3">Ingredientes Premium</h3>
+        <p class="text-stone-500 text-sm font-light leading-relaxed">
+          Trabajamos con proveedores locales. Harina orgánica, manteca de primera y chocolates de origen.
+        </p>
+      </div>
+      <!-- Feature 2 -->
+      <div class="card-lift bg-amber-800 rounded-2xl p-8 shadow-sm text-center">
+        <div class="text-5xl mb-4">👩‍🍳</div>
+        <h3 class="font-display text-xl font-bold text-amber-50 mb-3">Maestras Pasteleras</h3>
+        <p class="text-amber-200 text-sm font-light leading-relaxed">
+          Nuestro equipo se formó en Buenos Aires y París. Cada detalle es ejecutado con técnica y cariño.
+        </p>
+      </div>
+      <!-- Feature 3 -->
+      <div class="card-lift bg-white rounded-2xl p-8 shadow-sm border border-amber-100 text-center">
+        <div class="text-5xl mb-4">🎁</div>
+        <h3 class="font-display text-xl font-bold text-amber-900 mb-3">Pedidos Personalizados</h3>
+        <p class="text-stone-500 text-sm font-light leading-relaxed">
+          Diseñamos la torta de tus sueños. Comunicate con nosotras y lo hacemos realidad.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENÚ ===== -->
+  <section id="menu" class="bg-stone-100 py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="ornament mb-4">
+        <span class="font-display italic text-amber-700 text-lg">Lo que hacemos</span>
+      </div>
+      <h2 class="font-display text-4xl font-bold text-amber-900 text-center mb-16">
+        Nuestras especialidades
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Card 1 -->
+        <div class="card-lift bg-white rounded-2xl overflow-hidden shadow-sm border border-amber-100">
+          <div class="bg-amber-100 h-48 flex items-center justify-center text-7xl">🎂</div>
+          <div class="p-6">
+            <span class="text-xs font-bold tracking-widest text-amber-600 uppercase">Tortas de celebración</span>
+            <h3 class="font-display text-xl font-bold text-stone-800 mt-1 mb-2">Torta Fondant Premium</h3>
+            <p class="text-stone-400 text-sm font-light leading-relaxed mb-4">
+              Diseño personalizado con fondant artesanal. Sabores: vainilla, chocolate, red velvet, limón y más.
+            </p>
+            <p class="font-display text-2xl font-bold text-amber-800">desde $18.000</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-lift bg-white rounded-2xl overflow-hidden shadow-sm border border-amber-100">
+          <div class="bg-rose-50 h-48 flex items-center justify-center text-7xl">🧁</div>
+          <div class="p-6">
+            <span class="text-xs font-bold tracking-widest text-rose-500 uppercase">Mini delicias</span>
+            <h3 class="font-display text-xl font-bold text-stone-800 mt-1 mb-2">Cupcakes Artesanales</h3>
+            <p class="text-stone-400 text-sm font-light leading-relaxed mb-4">
+              Docenas de cupcakes decorados a mano. Ideales para cumpleaños, bodas y eventos corporativos.
+            </p>
+            <p class="font-display text-2xl font-bold text-amber-800">desde $4.500 x12</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-lift bg-white rounded-2xl overflow-hidden shadow-sm border border-amber-100">
+          <div class="bg-amber-50 h-48 flex items-center justify-center text-7xl">🥐</div>
+          <div class="p-6">
+            <span class="text-xs font-bold tracking-widest text-amber-600 uppercase">Desayunos y meriendas</span>
+            <h3 class="font-display text-xl font-bold text-stone-800 mt-1 mb-2">Caja Croissant & Café</h3>
+            <p class="text-stone-400 text-sm font-light leading-relaxed mb-4">
+              Masa hojaldrada elaborada lentamente. Croissants de manteca, medialunas y tostadas artesanales.
+            </p>
+            <p class="font-display text-2xl font-bold text-amber-800">desde $3.200 x6</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card-lift bg-white rounded-2xl overflow-hidden shadow-sm border border-amber-100">
+          <div class="bg-stone-100 h-48 flex items-center justify-center text-7xl">🍫</div>
+          <div class="p-6">
+            <span class="text-xs font-bold tracking-widest text-stone-500 uppercase">Bombonería</span>
+            <h3 class="font-display text-xl font-bold text-stone-800 mt-1 mb-2">Trufas & Bombones</h3>
+            <p class="text-stone-400 text-sm font-light leading-relaxed mb-4">
+              Elaboradas con cacao 70%. Rellenos de frambuesa, praliné, maracuyá y ganache clásica.
+            </p>
+            <p class="font-display text-2xl font-bold text-amber-800">desde $2.800 x12</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card-lift bg-white rounded-2xl overflow-hidden shadow-sm border border-amber-100">
+          <div class="bg-pink-50 h-48 flex items-center justify-center text-7xl">🍰</div>
+          <div class="p-6">
+            <span class="text-xs font-bold tracking-widest text-pink-500 uppercase">Porciones individuales</span>
+            <h3 class="font-display text-xl font-bold text-stone-800 mt-1 mb-2">Petit Gâteau</h3>
+            <p class="text-stone-400 text-sm font-light leading-relaxed mb-4">
+              Pequeños pasteles de autor en formato individual. Cheesecake, opera, tiramisu y tarta de frutos rojos.
+            </p>
+            <p class="font-display text-2xl font-bold text-amber-800">desde $1.900 c/u</p>
+          </div>
+        </div>
+
+        <!-- Card 6 – Destacada -->
+        <div class="card-lift bg-amber-800 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-amber-700 h-48 flex items-center justify-center text-7xl">💍</div>
+          <div class="p-6">
+            <span class="text-xs font-bold tracking-widest text-amber-300 uppercase">Eventos especiales</span>
+            <h3 class="font-display text-xl font-bold text-amber-50 mt-1 mb-2">Torta de Boda</h3>
+            <p class="text-amber-200 text-sm font-light leading-relaxed mb-4">
+              El centro de tu gran día. Diseño exclusivo, múltiples pisos, flores de azúcar y sabores a elección.
+            </p>
+            <p class="font-display text-2xl font-bold text-amber-300">Consultar precio</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALERÍA ===== -->
+  <section id="galeria" class="max-w-6xl mx-auto px-6 py-24">
+    <div class="ornament mb-4">
+      <span class="font-display italic text-amber-700 text-lg">Nuestro trabajo</span>
+    </div>
+    <h2 class="font-display text-4xl font-bold text-amber-900 text-center mb-16">
+      Un vistazo al atelier
+    </h2>
+
+    <!-- Mosaic grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="card-lift col-span-2 row-span-2 bg-amber-100 rounded-2xl h-72 md:h-auto flex items-center justify-center text-8xl shadow-sm">🎂</div>
+      <div class="card-lift bg-rose-100 rounded-2xl h-32 flex items-center justify-center text-5xl shadow-sm">🧁</div>
+      <div class="card-lift bg-amber-50 rounded-2xl h-32 flex items-center justify-center text-5xl shadow-sm">🥐</div>
+      <div class="card-lift bg-stone-100 rounded-2xl h-32 flex items-center justify-center text-5xl shadow-sm">🍫</div>
+      <div class="card-lift bg-pink-50 rounded-2xl h-32 flex items-center justify-center text-5xl shadow-sm">🍰</div>
+      <div class="card-lift bg-amber-200 rounded-2xl h-32 flex items-center justify-center text-5xl shadow-sm col-span-2">🌸 Decoraciones de temporada 🌸</div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIOS ===== -->
+  <section class="bg-amber-900 py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="font-display text-3xl font-bold text-amber-50 text-center mb-12">
+        Lo que dicen nuestras clientas
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-amber-800 rounded-2xl p-6">
+          <p class="text-amber-200 font-light text-sm leading-relaxed mb-4">
+            "La torta de cumpleaños de mi hija fue simplemente perfecta. Cada detalle superó mis expectativas y el sabor era increíble."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center text-amber-50 font-bold">M</div>
+            <div>
+              <p class="text-amber-100 font-semibold text-sm">Mariana G.</p>
+              <p class="text-amber-400 text-xs">Cliente desde 2018</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-amber-800 rounded-2xl p-6">
+          <p class="text-amber-200 font-light text-sm leading-relaxed mb-4">
+            "Pedí los cupcakes para mi casamiento y todos los invitados preguntaban de dónde eran. ¡Son una obra de arte!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center text-amber-50 font-bold">S</div>
+            <div>
+              <p class="text-amber-100 font-semibold text-sm">Sofía R.</p>
+              <p class="text-amber-400 text-xs">Novia feliz · 2023</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-amber-800 rounded-2xl p-6">
+          <p class="text-amber-200 font-light text-sm leading-relaxed mb-4">
+            "Los croissants de los domingos son nuestra tradición familiar. No hay nada igual en el barrio, son de otro nivel."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center text-amber-50 font-bold">L</div>
+            <div>
+              <p class="text-amber-100 font-semibold text-sm">Laura P.</p>
+              <p class="text-amber-400 text-xs">Cliente fiel · 5 años</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO ===== -->
+  <section id="contacto" class="max-w-6xl mx-auto px-6 py-24">
+    <div class="ornament mb-4">
+      <span class="font-display italic text-amber-700 text-lg">Hablemos</span>
+    </div>
+    <h2 class="font-display text-4xl font-bold text-amber-900 text-center mb-4">
+      ¿Tenés un evento especial?
+    </h2>
+    <p class="text-stone-500 text-center font-light mb-16 max-w-xl mx-auto">
+      Contanos tu idea y armamos juntas el pedido perfecto. También podés visitarnos en el local.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+
+      <!-- Contact Info -->
+      <div class="space-y-8">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-2xl shrink-0">📍</div>
+          <div>
+            <h3 class="font-semibold text-stone-800 mb-1">Dónde encontrarnos</h3>
+            <p class="text-stone-500 text-sm font-light">Av. Santa Fe 1842, Palermo<br>Buenos Aires, Argentina</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-2xl shrink-0">🕐</div>
+          <div>
+            <h3 class="font-semibold text-stone-800 mb-1">Horarios</h3>
+            <p class="text-stone-500 text-sm font-light">Martes a Viernes: 9:00 – 20:00<br>Sábados y Domingos: 9:00 – 18:00</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-2xl shrink-0">📱</div>
+          <div>
+            <h3 class="font-semibold text-stone-800 mb-1">WhatsApp & Redes</h3>
+            <p class="text-stone-500 text-sm font-light">+54 11 4567-8901<br>@dulceatelier.ba</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form-like card -->
+      <div class="bg-white rounded-2xl p-8 shadow-sm border border-amber-100">
+        <h3 class="font-display text-2xl font-bold text-amber-900 mb-6">Hacer un pedido</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-stone-600 mb-1">Tu nombre</label>
+            <input type="text" placeholder="Ej: María González"
+                   class="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700
+                          focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition-all" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-stone-600 mb-1">WhatsApp o Email</label>
+            <input type="text" placeholder="Ej: 11 1234-5678"
+                   class="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700
+                          focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition-all" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-stone-600 mb-1">¿Qué tenés en mente?</label>
+            <textarea rows="4" placeholder="Contanos el tipo de evento, cantidad de personas, sabores preferidos..."
+                      class="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700
+                             focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition-all resize-none"></textarea>
+          </div>
+          <button
+            class="w-full bg-amber-800 text-amber-50 font-bold py-3 rounded-xl
+                   hover:bg-amber-700 hover:shadow-lg hover:scale-[1.02] active:scale-95
+                   transition-all duration-300 text-sm tracking-wide">
+            Enviar consulta ✉️
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-stone-900 text-stone-400 py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🎂</span>
+        <span class="font-display text-white text-lg">Dulce Atelier</span>
+      </div>
+      <p class="text-sm font-light text-center">
+        © 2025 Dulce Atelier · Todos los derechos reservados · Hecho con 💛 en Buenos Aires
+      </p>
+      <div class="flex gap-4 text-sm">
+        <a href="#inicio"   class="hover:text-amber-400 transition-colors">Inicio</a>
+        <a href="#menu"     class="hover:text-amber-400 transition-colors">Menú</a>
+        <a href="#contacto" class="hover:text-amber-400 transition-colors">Contacto</a>
+      </div>
+    </div>
+  </footer>
 
 </body>
-
 </html>
