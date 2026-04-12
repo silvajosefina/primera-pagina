@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dulce Atelier – Pastelería Artesanal</title>
+  <title>Dulce Atelier - Pastelería Artesanal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
     body { font-family: 'Lato', sans-serif; }
     h1, h2, h3, .font-display { font-family: 'Playfair Display', serif; }
 
-    /* Grain texture overlay */
     body::before {
       content: '';
       position: fixed;
@@ -21,17 +20,14 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Smooth scroll */
     html { scroll-behavior: smooth; }
 
-    /* Hero floating animation */
     @keyframes float {
       0%, 100% { transform: translateY(0px) rotate(-2deg); }
       50% { transform: translateY(-12px) rotate(-2deg); }
     }
     .float-anim { animation: float 5s ease-in-out infinite; }
 
-    /* Fade-in on load */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -42,11 +38,9 @@
     .delay-3 { animation-delay: 0.45s; opacity: 0; }
     .delay-4 { animation-delay: 0.60s; opacity: 0; }
 
-    /* Card hover lift */
     .card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .card-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.10); }
 
-    /* Nav link underline */
     .nav-link { position: relative; }
     .nav-link::after {
       content: '';
@@ -58,7 +52,6 @@
     }
     .nav-link:hover::after { width: 100%; }
 
-    /* Divider ornament */
     .ornament {
       display: flex; align-items: center; gap: 1rem;
     }
@@ -69,7 +62,7 @@
 </head>
 <body class="bg-amber-50 text-stone-800">
 
-  <!-- ===== NAVBAR ===== -->
+  <!-- NAVBAR -->
   <nav class="sticky top-0 z-50 bg-amber-50/90 backdrop-blur-sm border-b border-amber-200">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <!-- Logo -->
@@ -79,7 +72,7 @@
         </span>
       </a>
 
-      <!-- Desktop links -->
+      <!-- Links -->
       <ul class="hidden md:flex items-center gap-8 text-sm font-light tracking-wide text-stone-600">
         <li><a href="#inicio"   class="nav-link hover:text-amber-800 transition-colors">Inicio</a></li>
         <li><a href="#nosotros" class="nav-link hover:text-amber-800 transition-colors">Nosotros</a></li>
@@ -87,14 +80,12 @@
         <li><a href="#contacto" class="nav-link hover:text-amber-800 transition-colors">Contacto</a></li>
       </ul>
 
-      <!-- CTA -->
       <a href="#contacto"
          class="hidden md:inline-block bg-amber-800 text-amber-50 text-sm font-semibold px-5 py-2 rounded-full
                 hover:bg-amber-700 hover:shadow-lg transition-all duration-300">
         Hacer un pedido
       </a>
 
-      <!-- Mobile hamburger (decorative) -->
       <div class="md:hidden flex flex-col gap-1.5 cursor-pointer">
         <span class="block w-6 h-0.5 bg-amber-900"></span>
         <span class="block w-6 h-0.5 bg-amber-900"></span>
@@ -103,10 +94,9 @@
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
   <section id="inicio" class="max-w-6xl mx-auto px-6 pt-16 pb-24
                                grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-    <!-- Text -->
+    <!-- Texto -->
     <div>
       <p class="fade-up delay-1 text-amber-700 text-sm font-semibold tracking-widest uppercase mb-4">
         Pastelería artesanal
@@ -133,7 +123,7 @@
   </section>
 
   
-  <!-- ===== STATS BAR ===== -->
+  <!-- STATS BAR -->
   <div class="bg-amber-800 text-amber-50">
     <div class="max-w-6xl mx-auto px-6 py-8
                 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -156,7 +146,7 @@
     </div>
   </div>
 
-  <!-- ===== NOSOTROS ===== -->
+  <!-- NOSOTROS -->
   <section id="nosotros" class="max-w-6xl mx-auto px-6 py-24">
     <div class="ornament mb-4">
       <span class="font-display italic text-amber-700 text-lg">Nuestra historia</span>
@@ -299,7 +289,7 @@
       <!-- Dirección -->
       <div class="flex items-start gap-4">
         <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
-          <img src="https://e7.pngegg.com/pngimages/974/911/png-clipart-computer-icons-others-map-address.png"
+          <img src="https://cdn-icons-png.flaticon.com/512/5774/5774554.png"
                class="w-6 h-6 object-contain">
         </div>
         <div>
@@ -328,7 +318,7 @@
       <!-- WhatsApp -->
       <div class="flex items-start gap-4">
         <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
-          <img src="https://w7.pngwing.com/pngs/789/510/png-transparent-whatsapp-chat-line-icon-messenger-social-web-social-icons-icon.png"
+          <img src="https://www.pngall.com/wp-content/uploads/13/Whatsapp-Logo-PNG-Pic.png"
                class="w-6 h-6 object-contain">
         </div>
         <div>
@@ -380,6 +370,7 @@
   </div>
 </section>
 
+  <!-- FOOTER -->
   <footer class="bg-stone-900 text-stone-400 py-10">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
